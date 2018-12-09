@@ -6,7 +6,7 @@ var io = require("socket.io")(http);
 var Session = require('express-session');
 var cookieParser = require('cookie-parser');
 /*requiring node modules ends */
-var port = 5000;
+ var port = process.env.PORT || 8080;
 
 // the session is stored in a cookie, so we use this to parse it
 app.use(cookieParser());
