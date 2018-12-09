@@ -32,12 +32,12 @@ app.use(Session);
 var sessionInfo;
 
 /* requiring config file starts*/
-var config =require('./middleware/config.js')(app);
+///var config =require('./middleware/config.js')(app);
 /* requiring config file ends*/
 
 /* requiring config db.js file starts*/
 ///var db = require("./middleware/db.js");
-var connection;
+///var connection;
 
 ///connection=db();
 ///require('./middleware/auth-routes.js') (app,connection,Session,cookieParser,sessionInfo);
@@ -54,6 +54,12 @@ console.log("message sent"+data);
 });
  socket.emit('welcome', { message: 'Welcome kumar!', id: socket.id });
 });
+app.get('/getdata', function(req, res){
+		
+	    		res.write("kumara"+port);
+	    		res.end();
+		
+	});
 http.listen(port,function(){
-    console.log("Listening on http://127.0.0.1:"+port);
+    console.log("Listening on "+port);
 });
