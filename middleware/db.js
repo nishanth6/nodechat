@@ -9,7 +9,7 @@ function db() {
 
       // config for your database
       var config = {
-         host: "localhost",
+         host: "localhostss",
          user: "root",
          password: "" ,
          database : 'chat'

@@ -6,7 +6,7 @@ var io = require("socket.io")(http);
 var Session = require('express-session');
 var cookieParser = require('cookie-parser');
 /*requiring node modules ends */
- var port = process.env.PORT || 8080;
+ var port = process.env.PORT || 5000;
 
 // the session is stored in a cookie, so we use this to parse it
 app.use(cookieParser());
@@ -36,13 +36,24 @@ var config =require('./middleware/config.js')(app);
 /* requiring config file ends*/
 
 /* requiring config db.js file starts*/
-var db = require("./middleware/db.js");
+///var db = require("./middleware/db.js");
 var connection;
 
-connection=db();
-require('./middleware/auth-routes.js') (app,connection,Session,cookieParser,sessionInfo);
-require('./middleware/routes.js')(app,connection,io,Session,cookieParser,sessionInfo);
+///connection=db();
+///require('./middleware/auth-routes.js') (app,connection,Session,cookieParser,sessionInfo);
+//require('./middleware/routes.js')(app,connection,io,Session,cookieParser,sessionInfo);
+io.on('connection',function(socket){
 
+
+
+		var uIdSocket=socket.request.session.uid;
+
+socket.on('send',function(data){
+console.log("message sent"+data);
+ socket.emit('recieve', data);
+});
+ socket.emit('welcome', { message: 'Welcome kumar!', id: socket.id });
+});
 http.listen(port,function(){
     console.log("Listening on http://127.0.0.1:"+port);
 });
