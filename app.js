@@ -50,9 +50,9 @@ io.on('connection',function(socket){
 
 socket.on('send',function(data){
 console.log("message sent"+data);
- socket.emit('recieve', data);
+io.emit('recieve', data);
 });
- socket.emit('welcome', { message: 'Welcome kumar!', id: socket.id });
+ io.emit('welcome', { message: 'Welcome kumar!', id: socket.id });
 });
 app.get('/getdata', function(req, res){
 		
