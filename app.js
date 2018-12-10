@@ -42,18 +42,7 @@ var sessionInfo;
 ///connection=db();
 ///require('./middleware/auth-routes.js') (app,connection,Session,cookieParser,sessionInfo);
 //require('./middleware/routes.js')(app,connection,io,Session,cookieParser,sessionInfo);
-io.on('connection',function(socket){
-
-
-
-		var uIdSocket=socket.request.session.uid;
-
-socket.on('send',function(data){
-console.log("message sent"+data);
-io.emit('recieve', data);
-});
- io.emit('welcome', { message: 'Welcome kumar!', id: socket.id });
-});
+require('./middleware/sockets.js')(io);
 app.get('/getdata', function(req, res){
 		
 	    		res.write("kumara"+port);
