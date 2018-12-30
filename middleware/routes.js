@@ -1,17 +1,13 @@
-var bodyParser = require('body-parser');
  var sql = require("mysql");
 // requiring Helper file to run helper functions
 var helper = require('./helper');
+const db= require('./db.js');
+//const db=new database();
 exports.helper = helper;
 
 var method=routes.prototype;
 
-function routes(app,connection,io,sessionInfo){
-	app.use(bodyParser.urlencoded({
-		extended: true
-	}));
-	app.use(bodyParser.json());
-
+function routes(app,io,sessionInfo){	
 	// creating array of users.
 	var users=[];
 	var uid="";
@@ -265,10 +261,12 @@ console.log("message sent"+data);
 /*
 		post to handle get_users_to_chats request
 	*/
-	app.get('/getdata', function(req, res){
-		
-	    		res.write("kumara");
+	app.post('/chatHistory', function(req, res){
+		try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
+			 db.getChatHistory(req.body,function(chats){
+	    		res.write(JSON.stringify(chats));
 	    		res.end();
+         })
 		
 	});
 
