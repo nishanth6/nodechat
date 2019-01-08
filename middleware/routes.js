@@ -269,7 +269,31 @@ console.log("message sent"+data);
          })
 		
 	});
-
+/*
+		post to handle get_users_to_chats request
+	*/
+	app.post('/addusertogroup', function(req, res){
+		try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
+			 db.addusertogroup(req.body,function(chats){
+	    		res.write(JSON.stringify(chats));
+	    		res.end();
+         })
+		
+	});
+	 app.post('/saveChat', function(req, res){
+        try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
+            db.saveChat(req.body, function(chats){
+            res.write(JSON.stringify(chats));
+            res.end();
+        })
+    });
+	 app.post('/GetUserGroups', function(req, res){
+        try{req.body = JSON.parse(Object.keys(req.body)[0])}catch(err){req.body = req.body}
+            db.GetUserGroups(req.body, function(chats){
+            res.write(JSON.stringify(chats));
+            res.end();
+        })
+    });
 }
 
 method.getroutes=function(){
